@@ -85,27 +85,27 @@ export default function DashboardLayout({ children }) {
       </div>
 
       <div className="flex">
-        {/* Sidebar */}
+        {/* Sidebar - Fixed */}
         <aside
           className={`${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out lg:transition-none`}
+          } lg:translate-x-0 fixed inset-y-0 left-0 z-50 w-64 glass border-r border-white/30 transition-transform duration-300 ease-in-out lg:transition-none shadow-2xl`}
         >
           <div className="h-full flex flex-col">
             {/* Logo */}
-            <div className="hidden lg:flex items-center gap-3 px-6 py-5 border-b border-gray-200">
-              <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+            <div className="hidden lg:flex items-center gap-3 px-6 py-5 border-b border-white/20 bg-gradient-to-r from-primary-50/50 to-transparent">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30 animate-float">
                 <GraduationCap className="text-white" size={24} />
               </div>
               <div>
-                <h1 className="font-bold text-lg text-gray-900">AI Admission</h1>
-                <p className="text-xs text-gray-500">{roleLabels[role]}</p>
+                <h1 className="font-bold text-lg gradient-text">AI Admission</h1>
+                <p className="text-xs text-gray-600 font-medium">{roleLabels[role]}</p>
               </div>
             </div>
 
             {/* Navigation */}
             <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
-              {menus.map((item) => {
+              {menus.map((item, index) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 return (
@@ -113,14 +113,20 @@ export default function DashboardLayout({ children }) {
                     key={item.path}
                     to={item.path}
                     onClick={() => setSidebarOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg relative overflow-hidden ${
                       isActive
-                        ? 'bg-primary-50 text-primary-700 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold shadow-lg shadow-primary-500/30'
+                        : 'text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-100/50'
                     }`}
+                    style={{
+                      animation: `slideInLeft 0.3s ease-out ${index * 0.05}s both`
+                    }}
                   >
-                    <Icon size={20} />
-                    <span>{item.label}</span>
+                    <Icon 
+                      size={20} 
+                      className={`transition-transform duration-200 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}
+                    />
+                    <span className="transition-all duration-200">{item.label}</span>
                   </Link>
                 );
               })}
@@ -153,36 +159,30 @@ export default function DashboardLayout({ children }) {
         {/* Overlay for mobile */}
         {sidebarOpen && (
           <div
-            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 animate-fadeIn"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
         {/* Main content */}
-        <main className="flex-1 min-w-0">
+        <main className="flex-1 min-w-0 lg:ml-64">
           {/* Top bar */}
-          <div className="hidden lg:block bg-white border-b border-gray-200 px-6 py-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">
+          <div className="hidden lg:block glass border-b border-white/20 px-6 py-4 sticky top-0 z-30 shadow-lg backdrop-blur-md">
+            <div className="flex items-center justify-between animate-fadeIn">
+              <h2 className="text-2xl font-bold text-gray-900 animate-slideInRight">
                 {menus.find((m) => m.path === location.pathname)?.label || 'Dashboard'}
               </h2>
               <div className="flex items-center gap-4">
-                <button className="p-2 rounded-lg hover:bg-gray-100 relative">
-                  <Bell size={20} className="text-gray-600" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                <button className="p-2 rounded-lg hover:bg-gray-100 relative transition-all duration-200 hover:scale-110 group">
+                  <Bell size={20} className="text-gray-600 group-hover:text-primary-600 transition-colors" />
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                 </button>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                    <User size={16} className="text-primary-600" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-700">{user?.name}</span>
-                </div>
               </div>
             </div>
           </div>
 
           {/* Page content */}
-          <div className="p-4 lg:p-6">{children}</div>
+          <div className="p-4 lg:p-6 animate-fadeIn">{children}</div>
         </main>
       </div>
     </div>

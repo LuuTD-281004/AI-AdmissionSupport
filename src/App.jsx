@@ -5,28 +5,28 @@ import DashboardLayout from './components/Layout/DashboardLayout';
 import Login from './pages/Login';
 
 // Admin pages
-import AdminDashboard from './pages/admin/Dashboard';
+import AdminDashboard from './pages/admin/AdminDashboard';
 import SchoolVerification from './pages/admin/SchoolVerification';
 import CMS from './pages/admin/CMS';
 import UserManagement from './pages/admin/UserManagement';
-import AdminReports from './pages/admin/Reports';
+import AdminReports from './pages/admin/AdminReports';
 
 // School pages
-import SchoolDashboard from './pages/school/Dashboard';
-import SchoolProfile from './pages/school/Profile';
+import SchoolDashboard from './pages/school/SchoolDashboard';
+import SchoolProfile from './pages/school/SchoolProfile';
 import AdmissionScores from './pages/school/AdmissionScores';
 import BookingManagement from './pages/school/BookingManagement';
-import SchoolAnalytics from './pages/school/Analytics';
+import SchoolAnalytics from './pages/school/SchoolAnalytics';
 
 // Member pages
-import MemberDashboard from './pages/member/Dashboard';
+import MemberDashboard from './pages/member/MemberDashboard';
 import AIRecommendation from './pages/member/AIRecommendation';
 import Wishlist from './pages/member/Wishlist';
 import Counseling from './pages/member/Counseling';
 import Notifications from './pages/member/Notifications';
 
 // Assistant pages
-import AssistantDashboard from './pages/assistant/Dashboard';
+import AssistantDashboard from './pages/assistant/AssistantDashboard';
 import CounselingSessions from './pages/assistant/Sessions';
 import Workspace from './pages/assistant/Workspace';
 import Evaluations from './pages/assistant/Evaluations';
