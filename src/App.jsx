@@ -3,6 +3,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/Layout/ProtectedRoute';
 import DashboardLayout from './components/Layout/DashboardLayout';
 import Login from './pages/Login';
+import Home from './pages/Home';
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -36,6 +37,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<div className="min-h-screen flex items-center justify-center"><h1>Không có quyền truy cập</h1></div>} />
           
@@ -114,7 +116,6 @@ function App() {
             }
           />
 
-          <Route path="/" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
