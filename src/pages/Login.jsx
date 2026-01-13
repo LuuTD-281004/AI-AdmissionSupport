@@ -46,37 +46,45 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-2xl mb-4">
-            <GraduationCap className="text-white" size={32} />
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4 animate-fadeIn relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-200/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      </div>
+      
+      <div className="w-full max-w-md animate-scaleIn relative z-10">
+        <div className="glass rounded-3xl p-8 shadow-2xl border border-white/20">
+          <div className="text-center mb-8 animate-fadeInDown">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl mb-6 animate-bounce-slow hover:scale-110 transition-transform duration-300 cursor-pointer shadow-xl shadow-primary-500/30 animate-glow">
+              <GraduationCap className="text-white" size={36} />
+            </div>
+            <h1 className="text-4xl font-bold gradient-text mb-3 animate-slideInRight">AI Admission Portal</h1>
+            <p className="text-gray-600 font-medium animate-slideInLeft">Hệ thống tư vấn tuyển sinh thông minh</p>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Admission Portal</h1>
-          <p className="text-gray-600">Hệ thống tư vấn tuyển sinh thông minh</p>
-        </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Role selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Đăng nhập với vai trò
               </label>
-              <div className="grid grid-cols-2 gap-3">
-                {roleOptions.map((role) => (
+              <div className="grid grid-cols-2 gap-3 animate-stagger">
+                {roleOptions.map((role, index) => (
                   <button
                     key={role.value}
                     type="button"
                     onClick={() => setSelectedRole(role.value)}
-                    className={`p-4 rounded-lg border-2 transition-all ${
+                    className={`p-4 rounded-lg border-2 transition-all duration-300 hover:scale-105 hover:shadow-md ${
                       selectedRole === role.value
-                        ? 'border-primary-500 bg-primary-50 text-primary-700'
+                        ? 'border-primary-500 bg-primary-50 text-primary-700 scale-105 shadow-md'
                         : 'border-gray-200 hover:border-gray-300 text-gray-700'
                     }`}
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className="flex items-center gap-2">
-                      <div className={`w-3 h-3 rounded-full ${role.color}`}></div>
+                      <div className={`w-3 h-3 rounded-full ${role.color} transition-transform duration-300 ${selectedRole === role.value ? 'scale-150 animate-pulse-slow' : ''}`}></div>
                       <span className="text-sm font-medium">{role.label}</span>
                     </div>
                   </button>
@@ -126,13 +134,16 @@ export default function Login() {
               </div>
             )}
 
-            <button type="submit" className="w-full btn-primary py-3 text-base">
-              Đăng nhập
+            <button type="submit" className="w-full btn-primary py-3 text-base group">
+              <span className="flex items-center justify-center gap-2">
+                <span>Đăng nhập</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </span>
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
-            <p>Demo: Nhập bất kỳ email và mật khẩu nào để đăng nhập</p>
+          <div className="mt-6 text-center text-sm text-gray-600 bg-gray-50/50 rounded-xl p-3 backdrop-blur-sm">
+            <p className="font-medium">Demo: Nhập bất kỳ email và mật khẩu nào để đăng nhập</p>
           </div>
         </div>
       </div>

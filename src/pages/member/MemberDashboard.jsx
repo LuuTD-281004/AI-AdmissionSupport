@@ -30,13 +30,13 @@ export default function MemberDashboard() {
             <Link
               key={action.path}
               to={action.path}
-              className="card hover:shadow-lg transition-shadow cursor-pointer"
+              className="card hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer group"
             >
-              <div className={`${action.color} p-4 rounded-lg mb-4 inline-block`}>
+              <div className={`${action.color} p-4 rounded-xl mb-4 inline-block transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-lg group-hover:shadow-xl`}>
                 <Icon className="text-white" size={28} />
               </div>
-              <h3 className="font-bold text-gray-900 mb-1">{action.label}</h3>
-              <p className="text-sm text-gray-600">{action.description}</p>
+              <h3 className="font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors">{action.label}</h3>
+              <p className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">{action.description}</p>
             </Link>
           );
         })}
@@ -116,4 +116,5 @@ export default function MemberDashboard() {
     </div>
   );
 }
+
 

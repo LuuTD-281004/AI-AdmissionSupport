@@ -105,18 +105,20 @@ export default function AIRecommendation() {
       </div>
 
       {showForm && (
-        <div className="card bg-gradient-to-br from-primary-50 to-blue-50 border-primary-200">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-              <Sparkles className="text-white" size={24} />
+        <div className="card bg-gradient-to-br from-primary-50/80 via-blue-50/60 to-purple-50/40 border-primary-200/50 backdrop-blur-sm relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-100/20 to-transparent opacity-50"></div>
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30 animate-float">
+                <Sparkles className="text-white" size={28} />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold gradient-text">Nhập thông tin học tập</h2>
+                <p className="text-sm text-gray-600 font-medium">Hệ thống sẽ tính toán và gợi ý trường phù hợp</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-xl font-bold text-gray-900">Nhập thông tin học tập</h2>
-              <p className="text-sm text-gray-600">Hệ thống sẽ tính toán và gợi ý trường phù hợp</p>
-            </div>
-          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -199,11 +201,12 @@ export default function AIRecommendation() {
               </div>
             </div>
 
-            <button type="submit" className="w-full btn-primary py-3 text-base flex items-center justify-center gap-2">
-              <Sparkles size={20} />
+            <button type="submit" className="w-full btn-primary py-3 text-base flex items-center justify-center gap-2 group">
+              <Sparkles size={20} className="transition-transform duration-300 group-hover:rotate-180 group-hover:scale-110" />
               Nhận gợi ý từ AI
             </button>
-          </form>
+            </form>
+          </div>
         </div>
       )}
 
@@ -223,10 +226,14 @@ export default function AIRecommendation() {
           </div>
 
           {results.map((school, index) => (
-            <div key={school.id} className="card hover:shadow-lg transition-shadow">
+            <div 
+              key={school.id} 
+              className="card hover:shadow-2xl transition-all duration-300 hover:scale-[1.05] group animate-fadeInUp hover:border-primary-400"
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center text-white font-bold text-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 animate-bounce-slow shadow-lg shadow-primary-500/30">
                     {index + 1}
                   </div>
                   <div>
@@ -262,10 +269,13 @@ export default function AIRecommendation() {
                       <span className="text-xs text-gray-600">Năng lực</span>
                       <span className="text-xs font-bold text-gray-900">{school.criteria.ability}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-blue-500 h-2 rounded-full"
-                        style={{ width: `${school.criteria.ability}%` }}
+                        className="bg-blue-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                        style={{ 
+                          width: `${school.criteria.ability}%`,
+                          animation: `slideInLeft 0.8s ease-out ${index * 0.1 + 0.2}s both`
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -274,10 +284,13 @@ export default function AIRecommendation() {
                       <span className="text-xs text-gray-600">Khoảng cách</span>
                       <span className="text-xs font-bold text-gray-900">{school.criteria.distance}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-green-500 h-2 rounded-full"
-                        style={{ width: `${school.criteria.distance}%` }}
+                        className="bg-green-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                        style={{ 
+                          width: `${school.criteria.distance}%`,
+                          animation: `slideInLeft 0.8s ease-out ${index * 0.1 + 0.3}s both`
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -286,10 +299,13 @@ export default function AIRecommendation() {
                       <span className="text-xs text-gray-600">Học phí</span>
                       <span className="text-xs font-bold text-gray-900">{school.criteria.tuition}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-yellow-500 h-2 rounded-full"
-                        style={{ width: `${school.criteria.tuition}%` }}
+                        className="bg-yellow-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                        style={{ 
+                          width: `${school.criteria.tuition}%`,
+                          animation: `slideInLeft 0.8s ease-out ${index * 0.1 + 0.4}s both`
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -298,10 +314,13 @@ export default function AIRecommendation() {
                       <span className="text-xs text-gray-600">Sở thích</span>
                       <span className="text-xs font-bold text-gray-900">{school.criteria.preference}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-purple-500 h-2 rounded-full"
-                        style={{ width: `${school.criteria.preference}%` }}
+                        className="bg-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                        style={{ 
+                          width: `${school.criteria.preference}%`,
+                          animation: `slideInLeft 0.8s ease-out ${index * 0.1 + 0.5}s both`
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -309,12 +328,12 @@ export default function AIRecommendation() {
               </div>
 
               {/* Probability */}
-              <div className="flex items-center justify-between p-4 bg-primary-50 rounded-lg mb-4">
+              <div className="flex items-center justify-between p-4 bg-primary-50 rounded-lg mb-4 transition-all duration-300 group-hover:bg-primary-100 group-hover:scale-[1.02]">
                 <div className="flex items-center gap-2">
-                  <Star className="text-primary-600" size={20} />
+                  <Star className="text-primary-600 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" size={20} />
                   <span className="font-medium text-gray-900">Xác suất trúng tuyển</span>
                 </div>
-                <span className="text-xl font-bold text-primary-600">{school.probability}%</span>
+                <span className="text-xl font-bold text-primary-600 animate-pulse-slow">{school.probability}%</span>
               </div>
 
               <div className="flex gap-3">
